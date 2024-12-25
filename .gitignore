@@ -1,3 +1,7 @@
 /cmake-build-debug/
 testfile.txt
+testfile2.txt
+copy-for-me.cpp
+example.txt
+supertestfile.txt
 *.exe

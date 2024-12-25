@@ -1,0 +1,28 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - lab-2
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on:  windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install clang-format
+        run: choco install llvm -y
+
+      - name: Run clang-format
+        run: |
+          Get-ChildItem -Recurse -Include *.cpp, *.hpp | ForEach-Object { clang-format -i -style=file $_.FullName }
+          git diff --exit-code
+        shell: pwsh
+        continue-on-error: true
+
